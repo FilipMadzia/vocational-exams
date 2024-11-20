@@ -1,5 +1,39 @@
 <?php
-    echo "test";
+$polaczenie = mysqli_connect("localhost", "root", "", "psy");
+
+$status = "";
+
+$czyLoginUstawiony = isset($_POST["login"]) && $_POST["login"] != "";
+$czyHasloUstawione = isset($_POST["haslo"]) && $_POST["haslo"] != "";
+$czyPowtorzHasloUstawione = isset($_POST["powtorzHaslo"]) && $_POST["powtorzHaslo"] != "";
+
+if(!$czyLoginUstawiony || !$czyHasloUstawione || !$czyPowtorzHasloUstawione)
+{
+    $status = "wypełnij wszystkie pola";
+}
+else
+{
+    $kwerenda = mysqli_query($polaczenie, "SELECT login FROM uzytkownicy;");
+
+    while($wiersz = mysqli_fetch_array($kwerenda))
+    {
+        if($wiersz["login"] == $_POST["login"])
+        {
+            $status = "login występuje w bazie danych, konto nie zostało dodane";
+            break;
+        }
+    }
+
+    if($czyHasloUstawione && $czyPowtorzHasloUstawione)
+    {
+        if($_POST["haslo"] != $_POST["powtorzHaslo"])
+        {
+            $status = "hasła nie są takie same, konto nie zostało dodane";
+        }
+    }
+}
+
+mysqli_close($polaczenie);
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +56,7 @@
         <section>
             <section id="blok-prawy-gorny">
                 <h2>Zapisz się</h2>
-                <form method="POST">
+                <form method="post">
                     <label for="login">login: </label>
                     <input type="text" name="login" id="login">
                     <br />
@@ -36,6 +70,8 @@
 
                     <button type="submit">Zapisz</button>
                 </form>
+
+                <p><?php echo $status; ?></p>
             </section>
             <section id="blok-prawy-dolny">
                 <h2>Zapraszamy wszystkich</h2>
