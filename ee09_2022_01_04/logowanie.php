@@ -74,6 +74,7 @@ mysqli_close($polaczenie);
             <section id="blok-prawy-gorny">
                 <h2>Zapisz się</h2>
                 <form method="post">
+                <form method="post">
                     <label for="login">login: </label>
                     <input type="text" name="login" id="login">
                     <br />
@@ -87,6 +88,8 @@ mysqli_close($polaczenie);
 
                     <button type="submit">Zapisz</button>
                 </form>
+
+                <p><?php echo $status; ?></p>
 
                 <p><?php echo $status; ?></p>
             </section>
