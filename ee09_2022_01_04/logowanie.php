@@ -1,36 +1,53 @@
 <?php
-$polaczenie = mysqli_connect("localhost", "root", "", "psy");
-
-$status = "";
-
-$czyLoginUstawiony = isset($_POST["login"]) && $_POST["login"] != "";
-$czyHasloUstawione = isset($_POST["haslo"]) && $_POST["haslo"] != "";
-$czyPowtorzHasloUstawione = isset($_POST["powtorzHaslo"]) && $_POST["powtorzHaslo"] != "";
-
-if(!$czyLoginUstawiony || !$czyHasloUstawione || !$czyPowtorzHasloUstawione)
+function validate_form($polaczenie)
 {
-    $status = "wypełnij wszystkie pola";
-}
-else
-{
+    $czyLoginUstawiony = isset($_POST["login"]) && $_POST["login"] != "";
+    $czyHasloUstawione = isset($_POST["haslo"]) && $_POST["haslo"] != "";
+    $czyPowtorzHasloUstawione = isset($_POST["powtorzHaslo"]) && $_POST["powtorzHaslo"] != "";
+
+    if(!$czyLoginUstawiony || !$czyHasloUstawione || !$czyPowtorzHasloUstawione)
+    {
+        return "wypełnij wszystkie pola";
+    }
+
+    $login = $_POST["login"];
+    $haslo = $_POST["haslo"];
+    $powtorzHaslo = $_POST["powtorzHaslo"];
+
     $kwerenda = mysqli_query($polaczenie, "SELECT login FROM uzytkownicy;");
 
     while($wiersz = mysqli_fetch_array($kwerenda))
     {
-        if($wiersz["login"] == $_POST["login"])
+        if($wiersz["login"] == $login)
         {
-            $status = "login występuje w bazie danych, konto nie zostało dodane";
-            break;
+            return "login występuje w bazie danych, konto nie zostało dodane";
         }
     }
 
-    if($czyHasloUstawione && $czyPowtorzHasloUstawione)
+    if($haslo != $powtorzHaslo)
     {
-        if($_POST["haslo"] != $_POST["powtorzHaslo"])
-        {
-            $status = "hasła nie są takie same, konto nie zostało dodane";
-        }
+        return "hasła nie są takie same, konto nie zostało dodane";
     }
+
+    return "";
+}
+
+$polaczenie = mysqli_connect("localhost", "root", "", "psy");
+
+$status = validate_form($polaczenie);
+
+// status równy pustemu ciągu znaków oznacza, że formularz jest poprawny
+if($status == "")
+{
+    $login = $_POST["login"];
+    $haslo = sha1($_POST["haslo"]);
+
+    $kwerenda = $polaczenie->prepare("INSERT INTO uzytkownicy(login, haslo) VALUES(?, ?);");
+
+    $kwerenda->bind_param("ss", $login, $haslo);
+    $kwerenda->execute();
+
+    $status = "Konto zostało dodane";
 }
 
 mysqli_close($polaczenie);
@@ -57,6 +74,7 @@ mysqli_close($polaczenie);
             <section id="blok-prawy-gorny">
                 <h2>Zapisz się</h2>
                 <form method="post">
+                <form method="post">
                     <label for="login">login: </label>
                     <input type="text" name="login" id="login">
                     <br />
@@ -70,6 +88,8 @@ mysqli_close($polaczenie);
 
                     <button type="submit">Zapisz</button>
                 </form>
+
+                <p><?php echo $status; ?></p>
 
                 <p><?php echo $status; ?></p>
             </section>
