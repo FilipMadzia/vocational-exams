@@ -36,6 +36,15 @@ footer {
     height: 450px;
 }
 
+ img {
+    height: 100px;
+    padding: 7px;
+ }
+
+ img:hover {
+    background-color: #B3BC6D;
+ }
+
 table {
     border: 1px solid olive;
     margin: auto;

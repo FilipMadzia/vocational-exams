@@ -1,3 +1,7 @@
+<?php
+$polaczenie = mysqli_connect('localhost', 'root', '', 'biuro');
+?>
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -14,7 +18,16 @@
         <section id="blok-z-danymi">
             <h3>Wycieczki, na które są wolne miejsca</h3>
             <ul>
-                <!-- TODO -->
+                <?php
+                $zapytanie = "SELECT id, dataWyjazdu, cel, cena FROM wycieczki WHERE dostepna;";
+
+                $wynikZapytania = mysqli_query($polaczenie, $zapytanie);
+
+                while($dane = mysqli_fetch_array($wynikZapytania))
+                {
+                    echo "<li>" . $dane["id"] . " dnia " . $dane["dataWyjazdu"] . " jedziemy do " . $dane["cel"] . ", cena: " . $dane["cena"] . "</li>";
+                }
+                ?>
             </ul>
         </section>
         <section id="blok-lewy">
@@ -36,7 +49,16 @@
         </section>
         <section id="blok-srodkowy">
             <h2>Nasze zdjęcia</h2>
-            <!-- TODO -->
+            <?php
+            $zapytanie = "SELECT nazwaPliku, podpis FROM zdjecia ORDER BY podpis DESC;";
+
+            $wynikZapytania = mysqli_query($polaczenie, $zapytanie);
+
+            while($dane = mysqli_fetch_array($wynikZapytania))
+            {
+                echo '<img src="' . $dane["nazwaPliku"] . '" alt="' . $dane["podpis"] . '" />';
+            }
+            ?>
         </section>
         <section id="blok-prawy">
             <h2>Skontaktuj się</h2>
@@ -50,3 +72,7 @@
     </footer>
 </body>
 </html>
+
+<?php
+mysqli_close($polaczenie);
+?>
