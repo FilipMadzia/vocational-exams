@@ -62,7 +62,7 @@ $polaczenie = mysqli_connect('localhost', 'root', '', 'biuro');
         </section>
         <section id="blok-prawy">
             <h2>Skontaktuj się</h2>
-            <a href="email:turysta@wycieczki.pl">napisz do nas</a>
+            <a href="mailto:turysta@wycieczki.pl">napisz do nas</a>
             <p>telefon: 111222333</p>
         </section>
     </content>
