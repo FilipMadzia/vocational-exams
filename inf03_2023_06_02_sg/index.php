@@ -43,10 +43,10 @@ $polaczenie = mysqli_connect("localhost", "root", "", "sklep");
             <form action="index.php" method="post">
                 <label for="artykul">wybierz artykuł</label>
                 <select name="artykul" id="artykul">
-                    <option value="zeszyt-60-kartek">Zeszyt 60 kartek</option>
-                    <option value="zeszyt-32-kartki">Zeszyt 32 kartki</option>
-                    <option value="cyrkiel">Cyrkiel</option>
-                    <option value="linijka-30-cm">Linijka 30 cm</option>
+                    <option value="Zeszyt 60 kartek">Zeszyt 60 kartek</option>
+                    <option value="Zeszyt 32 kartki">Zeszyt 32 kartki</option>
+                    <option value="Cyrkiel">Cyrkiel</option>
+                    <option value="Linijka 30 cm">Linijka 30 cm</option>
                 </select>
                 <br />
 
@@ -55,9 +55,27 @@ $polaczenie = mysqli_connect("localhost", "root", "", "sklep");
 
                 <br />
 
-                <button type="submit">OBLICZ</button>
+                <button type="submit" name="submit">OBLICZ</button>
             </form>
             <!-- Skrypt 2 -->
+            <?php
+            if(isset($_POST["submit"]))
+            {
+                $nazwa = $_POST["artykul"];
+                $ilosc = $_POST["ilosc"];
+
+                $zapytanie = "SELECT cena FROM towary WHERE nazwa = '$nazwa'";
+
+                $wynik_zapytania = mysqli_query($polaczenie, $zapytanie);
+
+                while($dane = mysqli_fetch_array($wynik_zapytania))
+                {
+                    $obliczonaKwota = $dane["cena"] * $ilosc;
+
+                    echo "wartość zakupów: " . $obliczonaKwota;
+                }
+            }
+            ?>
         </section>
         <section id="blok-prawy">
             <h2>Kontakt</h2>
