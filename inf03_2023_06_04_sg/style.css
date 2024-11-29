@@ -14,8 +14,8 @@ footer {
     text-align: center;
 }
 
-section {
-    float: left;
+main {
+    display: flex;
 }
 
 #blok-lewy {
@@ -32,9 +32,15 @@ section {
     text-align: center;
 }
 
-.blok-prawy {
-    height: 250px;
+#blok-prawy {
     width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+#blok-prawy-gorny,
+#blok-prawy-dolny {
+    height: 250px;
 }
 
 #blok-prawy-gorny {
