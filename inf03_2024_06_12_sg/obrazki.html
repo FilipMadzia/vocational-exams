@@ -12,19 +12,22 @@
 
     <main>
         <section id="blok-pierwszy">
-            <img src="pszczola.jpg" alt="pszczoła na filetowym kwiatku">
+            <img id="obraz-1" src="pszczola.jpg" alt="pszczoła na filetowym kwiatku">
             <br>
             
-            <input type="radio" name="efekt" id="blur">
+            <input type="radio" name="efekt" id="blur" value="blur">
             <label for="blur">Blur</label>
+            <br>
 
-            <input type="radio" name="efekt" id="sepia">
-            <label for="septa">Sepia</label>
+            <input type="radio" name="efekt" id="sepia" value="sepia">
+            <label for="sepia">Sepia</label>
+            <br>
 
-            <input type="radio" name="efekt" id="negatyw">
+            <input type="radio" name="efekt" id="negatyw" value="negatyw">
             <label for="negatyw">Negatyw</label>
+            <br>
 
-            <button type="button">Zastosuj</button>
+            <button type="button" onclick="transformacjaObrazu1()">Zastosuj</button>
         </section>
         <section id="blok-drugi">
             <img src="pomarancza.jpg" alt="drzewo pomarańczy">
@@ -59,3 +62,32 @@
     </footer>
 </body>
 </html>
+
+<script>
+    function losowaZZakresu(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+
+    function transformacjaObrazu1() {
+        let obraz1 = document.getElementById("obraz-1");
+        let efekty = document.getElementsByName("efekt");
+
+        let efekt;
+        
+        efekty.forEach(function(element, index) {
+            if(element.checked) {
+                efekt = element.value;
+
+                return;
+            }
+        });
+
+        switch(efekt) {
+            case "blur":
+                let silaBlur = losowaZZakresu(4, 8);
+                obraz1.style.filter = `blur(${silaBlur}px)`;
+                break;
+        }
+    }
+</script>
