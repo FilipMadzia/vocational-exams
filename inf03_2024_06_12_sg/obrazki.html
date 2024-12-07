@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Efekty obrazu</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+    <header>
+        <h2>Efekty na obrazach</h2>
+    </header>
+
+    <main>
+        <section id="blok-pierwszy">
+            <img id="obraz-1" src="pszczola.jpg" alt="pszczoła na filetowym kwiatku">
+            <br>
+            
+            <input type="radio" name="efekt" id="blur" value="blur">
+            <label for="blur">Blur</label>
+            <br>
+
+            <input type="radio" name="efekt" id="sepia" value="sepia">
+            <label for="sepia">Sepia</label>
+            <br>
+
+            <input type="radio" name="efekt" id="negatyw" value="negatyw">
+            <label for="negatyw">Negatyw</label>
+            <br>
+
+            <button type="button" onclick="transformacjaObrazu1()">Zastosuj</button>
+        </section>
+        <section id="blok-drugi">
+            <img id="obraz-2" src="pomarancza.jpg" alt="drzewo pomarańczy">
+            <br>
+            
+            <button type="button" onclick="obraz2Kolory()">Kolorowy</button>
+            <button type="button" onclick="obraz2CzarnoBialy()">Czarno-biały</button>
+        </section>
+        <section id="blok-trzeci">
+            <img id="obraz-3" src="owoce.jpg" alt="Kosz pełen owoców">
+            <br>
+
+            <input type="range" name="opacity" id="opacity" min="0" max="100" value="100">
+            <br>
+            
+            <button type="button" onclick="transformacjaObrazu3()">Zastosuj</button>
+        </section>
+        <section id="blok-czwarty">
+            <img id="obraz-4" src="zolw.jpg" alt="Żółw w wodzie">
+            <br>
+
+            <input type="range" name="brightness" id="brightness" min="0" max="250">
+            <br>
+
+            <button type="button" onclick="transformacjaObrazu4()">Zastosuj</button>
+        </section>
+    </main>
+
+    <footer>
+        <p><a href="http://www.css.com/" target="_blank">Zobacz inne efekty obrazu</a></p>
+        <p>Stronę wykonał: Filip Madzia 03.12.2024</p>
+    </footer>
+</body>
+</html>
+
+<script>
+    function losowaZZakresu(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+
+    function transformacjaObrazu1() {
+        let obraz1 = document.getElementById("obraz-1");
+        let efekty = document.getElementsByName("efekt");
+
+        let efekt;
+        
+        efekty.forEach(function(element, index) {
+            if(element.checked) {
+                efekt = element.value;
+
+                return;
+            }
+        });
+
+        switch(efekt) {
+            case "blur":
+                let silaBlur = losowaZZakresu(4, 8);
+                obraz1.style.filter = `blur(${silaBlur}px)`;
+                break;
+            case "sepia":
+                obraz1.style.filter = "sepia(100%)";
+                break;
+            case "negatyw":
+                obraz1.style.filter = "invert(100%)";
+                break;
+        }
+    }
+
+    function obraz2Kolory() {
+        let obraz2 = document.getElementById("obraz-2");
+
+        obraz2.style.filter = "grayscale(0%)";
+    }
+
+    function obraz2CzarnoBialy() {
+        let obraz2 = document.getElementById("obraz-2");
+
+        obraz2.style.filter = "grayscale(100%)";
+    }
+
+    function transformacjaObrazu3() {
+        let obraz3 = document.getElementById("obraz-3");
+        let suwakPrzezroczystosci = document.getElementsByName("opacity")[0];
+
+        let silaPrzezroczystosci = suwakPrzezroczystosci.value;
+
+        obraz3.style.filter = `opacity(${silaPrzezroczystosci}%)`;
+    }
+
+    function transformacjaObrazu4() {
+        let obraz4 = document.getElementById("obraz-4");
+        let suwakJasnosci = document.getElementsByName("brightness")[0];
+
+        let silaJasnosci = suwakJasnosci.value;
+
+        obraz4.style.filter = `brightness(${silaJasnosci}%)`;
+    }
+</script>
