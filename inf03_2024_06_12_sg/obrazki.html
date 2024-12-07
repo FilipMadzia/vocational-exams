@@ -30,29 +30,29 @@
             <button type="button" onclick="transformacjaObrazu1()">Zastosuj</button>
         </section>
         <section id="blok-drugi">
-            <img src="pomarancza.jpg" alt="drzewo pomarańczy">
+            <img id="obraz-2" src="pomarancza.jpg" alt="drzewo pomarańczy">
             <br>
             
-            <button type="button">Kolorowy</button>
-            <button type="button">Czarno-biały</button>
+            <button type="button" onclick="obraz2Kolory()">Kolorowy</button>
+            <button type="button" onclick="obraz2CzarnoBialy()">Czarno-biały</button>
         </section>
         <section id="blok-trzeci">
-            <img src="owoce.jpg" alt="Kosz pełen owoców">
+            <img id="obraz-3" src="owoce.jpg" alt="Kosz pełen owoców">
             <br>
 
             <input type="range" name="opacity" id="opacity" min="0" max="100" value="100">
             <br>
             
-            <button type="button">Zastosuj</button>
+            <button type="button" onclick="transformacjaObrazu3()">Zastosuj</button>
         </section>
         <section id="blok-czwarty">
-            <img src="zolw.jpg" alt="Żółw w wodzie">
+            <img id="obraz-4" src="zolw.jpg" alt="Żółw w wodzie">
             <br>
 
             <input type="range" name="brightness" id="brightness" min="0" max="250">
             <br>
 
-            <button type="button">Zastosuj</button>
+            <button type="button" onclick="transformacjaObrazu4()">Zastosuj</button>
         </section>
     </main>
 
@@ -88,6 +88,42 @@
                 let silaBlur = losowaZZakresu(4, 8);
                 obraz1.style.filter = `blur(${silaBlur}px)`;
                 break;
+            case "sepia":
+                obraz1.style.filter = "sepia(100%)";
+                break;
+            case "negatyw":
+                obraz1.style.filter = "invert(100%)";
+                break;
         }
+    }
+
+    function obraz2Kolory() {
+        let obraz2 = document.getElementById("obraz-2");
+
+        obraz2.style.filter = "grayscale(0%)";
+    }
+
+    function obraz2CzarnoBialy() {
+        let obraz2 = document.getElementById("obraz-2");
+
+        obraz2.style.filter = "grayscale(100%)";
+    }
+
+    function transformacjaObrazu3() {
+        let obraz3 = document.getElementById("obraz-3");
+        let suwakPrzezroczystosci = document.getElementsByName("opacity")[0];
+
+        let silaPrzezroczystosci = suwakPrzezroczystosci.value;
+
+        obraz3.style.filter = `opacity(${silaPrzezroczystosci}%)`;
+    }
+
+    function transformacjaObrazu4() {
+        let obraz4 = document.getElementById("obraz-4");
+        let suwakJasnosci = document.getElementsByName("brightness")[0];
+
+        let silaJasnosci = suwakJasnosci.value;
+
+        obraz4.style.filter = `brightness(${silaJasnosci}%)`;
     }
 </script>
