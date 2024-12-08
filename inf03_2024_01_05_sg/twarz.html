@@ -48,7 +48,9 @@
                 <input type="checkbox" name="makijaz" id="makijaz" />
                 <label for="makijaz">Makijaż</label><br>
 
-                <button type="button">Oblicz cenę</button>
+                <button type="button" onclick="obliczCene()">Oblicz cenę</button>
+
+                <p id="wynik"></p>
             </section>
         </section>
     </main>
@@ -56,5 +58,24 @@
     <footer>
         <p>Autor: Filip Madzia 08.12.2024</p>
     </footer>
+
+    <script>
+        function obliczCene() {
+            let wynik = document.getElementById("wynik");
+            let suma = 0;
+
+            let peeling = document.getElementById("peeling").checked;
+            let maska = document.getElementById("maska").checked;
+            let masazTwarzy = document.getElementById("masaz-twarzy").checked;
+            let makijaz = document.getElementById("makijaz").checked;
+
+            if(peeling) suma += 45;
+            if(maska) suma += 30;
+            if(masazTwarzy) suma += 20;
+            if(makijaz) suma += 50;
+
+            wynik.innerText = "Cena zabiegów: " + suma;
+        }
+    </script>
 </body>
 </html>
