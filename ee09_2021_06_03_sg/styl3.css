@@ -36,6 +36,13 @@ footer {
     color: white;
 }
 
+.film-block {
+    padding: 5px;
+    width: 226px;
+    height: 280px;
+    float: left;
+}
+
 h3 {
     background-color: #546E7A;
     color: white;
