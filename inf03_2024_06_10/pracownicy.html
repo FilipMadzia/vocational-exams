@@ -52,17 +52,17 @@
             </div>
         </section>
         <section>
-            <blockquote id="quote-1">
+            <blockquote id="quote-1" onclick="nextQuote(1)">
                 "Każdego dnia stawiam sobie nieosiągalne wyzwania i próbuję je wykonać"
                 <p>- Krzysztof</p>
             </blockquote>
 
-            <blockquote id="quote-2">
+            <blockquote id="quote-2" onclick="nextQuote(2)">
                 "Nie bój się porażek, im więcej ich rozwiążesz, tym szybciej osiągniesz cel"
-                <p>- Krzysztof</p>
+                <p>- Joanna</p>
             </blockquote>
 
-            <blockquote id="quote-3">
+            <blockquote id="quote-3" onclick="nextQuote(3)">
                 "Niezadowolony pracownik jest dla mnie źródłem nauki"
                 <p>- Ewa</p>
             </blockquote>
@@ -70,5 +70,21 @@
     </main>
 
     <footer>Stronę wykonał: Filip Madzia</footer>
+
+    <script>
+        function nextQuote(currentQuoteId) {
+            let currentQuote = document.getElementById('quote-' + currentQuoteId);
+            let nextQuoteId = currentQuoteId + 1;
+
+            if(nextQuoteId >= 4) {
+                nextQuoteId = 1;
+            }
+
+            let nextQuote = document.getElementById('quote-' + nextQuoteId);
+
+            currentQuote.style.display = 'none';
+            nextQuote.style.display = 'block';
+        }
+    </script>
 </body>
 </html>
