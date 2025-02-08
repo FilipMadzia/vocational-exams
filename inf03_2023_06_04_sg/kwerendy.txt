@@ -1,4 +1,0 @@
-SELECT autorzy.imie, autorzy.nazwisko FROM autorzy ORDER BY autorzy.nazwisko ASC;
-INSERT INTO czytelnicy(imie, nazwisko, kod) VALUES("Ewa", "Kowalska", 145321);
-SELECT ksiazki.tytul FROM ksiazki WHERE ksiazki.id_kategoria = (SELECT kategorie.id FROM kategorie WHERE kategorie.nazwa = "dramat");
-SELECT ksiazki.tytul FROM ksiazki WHERE ksiazki.id IN (SELECT wypozyczenia.id_ksiazka FROM wypozyczenia WHERE wypozyczenia.id_czytelnik = 2);
