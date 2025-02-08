@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Biuro turystyczne</title>
+    <link rel="stylesheet" href="styl.css">
+</head>
+<body>
+    <header>
+        <h1>Zwiedzamy Polskę</h1>
+    </header>
+
+    <main>
+        <section id="container">
+            <section id="left">
+                <button id="previous-button" type="button" onclick="previousImage()">&lt;</button>
+            </section>
+            <section id="middle">
+                <img img-id="1" id="active-img" src="1.jpg" alt="Aktywne zdjęcie">
+            </section>
+            <section id="right">
+                <button id="next-button" type="button" onclick="nextImage()">&gt;</button>
+            </section>
+        </section>
+
+        <section id="miniatures">
+            <img class="miniature-img" src="1.jpg" alt="Gdańsk">
+            <img class="miniature-img" src="2.jpg" alt="Kraków">
+            <img class="miniature-img" src="3.jpg" alt="Niedzica">
+            <img class="miniature-img" src="4.jpg" alt="Pieniny">
+            <img class="miniature-img" src="5.jpg" alt="Szklarska Poręba">
+            <img class="miniature-img" src="6.jpg" alt="Tatry">
+            <img class="miniature-img" src="7.jpg" alt="Wrocław">
+        </section>
+    </main>
+
+    <footer>
+        <h3>Autorem galerii jest:</h3>
+        <p>Filip Madzia</p>
+        <a href="http://pixabay.com" target="_blank">Więcej zdjęć</a>
+    </footer>
+
+    <script>
+        function previousImage() {
+            let activeImage = getActiveImage();
+            let activeImageId = getActiveImageId();
+
+            if(activeImageId == 1) {
+                activeImage.src = '7.jpg';
+                activeImage.setAttribute('img-id', 7);
+            }
+            else {
+                let previousImageSrc = (activeImageId - 1) + '.jpg';
+                activeImage.src = previousImageSrc;
+                activeImage.setAttribute('img-id', activeImageId - 1)
+            }
+        }
+
+        function nextImage() {
+            let activeImage = getActiveImage();
+            let activeImageId = getActiveImageId();
+
+            if(activeImageId == 7) {
+                activeImage.src = '1.jpg';
+                activeImage.setAttribute('img-id', 1);
+            }
+            else {
+                let nextImageSrc = (parseInt(activeImageId) + 1) + '.jpg';
+                activeImage.src = nextImageSrc;
+                activeImage.setAttribute('img-id', parseInt(activeImageId) + 1)
+            }
+        }
+
+        function getActiveImage() {
+            return document.getElementById('active-img');
+        }
+
+        function getActiveImageId() {
+            return getActiveImage().getAttribute('img-id');
+        }
+    </script>
+</body>
+</html>
