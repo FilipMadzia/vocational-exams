@@ -5,7 +5,7 @@
 			 BackgroundColor="White">
 
 	<VerticalStackLayout>
-		<Label FontSize="Header" TextColor="White" BackgroundColor="Teal" Text="Rejestruj konto" />
+		<Label FontSize="Large" TextColor="White" BackgroundColor="Teal" Text="Rejestruj konto" />
 		
 		<Label TextColor="Gray" Text="Podaj e-mail:" />
 		<Entry TextColor="Black" x:Name="emailEntry" Placeholder="email" />
