@@ -7,6 +7,22 @@ namespace inf042024012
 			InitializeComponent();
 		}
 
+		private void OnNumberEntryLeave(object sender, EventArgs e)
+		{
+			var id = number.Text ?? "000";
+
+			try
+			{
+				profileImage.Image = Image.FromFile($"Images/{id}-zdjecie.jpg");
+				fingerpringImage.Image = Image.FromFile($"Images/{id}-odcisk.jpg");
+			}
+			catch
+			{
+				profileImage.Image = Image.FromFile($"Images/000-zdjecie.jpg");
+				fingerpringImage.Image = Image.FromFile("Images/000-odcisk.jpg");
+			}
+		}
+
 		private void button1_Click(object sender, EventArgs e)
 		{
 			if(firstName.Text != null && firstName.Text != string.Empty &&

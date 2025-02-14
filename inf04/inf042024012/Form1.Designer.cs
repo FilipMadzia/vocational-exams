@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
 			label1 = new Label();
 			label2 = new Label();
 			label3 = new Label();
@@ -39,7 +40,11 @@
 			radioButton2 = new RadioButton();
 			radioButton1 = new RadioButton();
 			button1 = new Button();
+			profileImage = new PictureBox();
+			fingerpringImage = new PictureBox();
 			eyeColorGroup.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)profileImage).BeginInit();
+			((System.ComponentModel.ISupportInitialize)fingerpringImage).BeginInit();
 			SuspendLayout();
 			// 
 			// label1
@@ -76,6 +81,7 @@
 			number.Name = "number";
 			number.Size = new Size(150, 31);
 			number.TabIndex = 3;
+			number.Leave += OnNumberEntryLeave;
 			// 
 			// firstName
 			// 
@@ -148,12 +154,33 @@
 			button1.UseVisualStyleBackColor = false;
 			button1.Click += button1_Click;
 			// 
+			// profileImage
+			// 
+			profileImage.Image = (Image)resources.GetObject("profileImage.Image");
+			profileImage.Location = new Point(371, 33);
+			profileImage.Name = "profileImage";
+			profileImage.Size = new Size(195, 225);
+			profileImage.SizeMode = PictureBoxSizeMode.AutoSize;
+			profileImage.TabIndex = 7;
+			profileImage.TabStop = false;
+			// 
+			// fingerpringImage
+			// 
+			fingerpringImage.Image = (Image)resources.GetObject("fingerpringImage.Image");
+			fingerpringImage.Location = new Point(581, 33);
+			fingerpringImage.Name = "fingerpringImage";
+			fingerpringImage.Size = new Size(195, 225);
+			fingerpringImage.TabIndex = 8;
+			fingerpringImage.TabStop = false;
+			// 
 			// Form1
 			// 
 			AutoScaleDimensions = new SizeF(10F, 25F);
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = Color.CadetBlue;
 			ClientSize = new Size(800, 450);
+			Controls.Add(fingerpringImage);
+			Controls.Add(profileImage);
 			Controls.Add(button1);
 			Controls.Add(eyeColorGroup);
 			Controls.Add(lastName);
@@ -166,6 +193,8 @@
 			Text = "Wprowadzenie danych do paszportu";
 			eyeColorGroup.ResumeLayout(false);
 			eyeColorGroup.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)profileImage).EndInit();
+			((System.ComponentModel.ISupportInitialize)fingerpringImage).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -183,5 +212,7 @@
 		private RadioButton radioButton2;
 		private RadioButton radioButton1;
 		private Button button1;
+		private PictureBox profileImage;
+		private PictureBox fingerpringImage;
 	}
 }
